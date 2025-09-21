@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name | Professional Title</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <style>
+        :root {
+            --color-primary: #6366f1;
+            --color-secondary: #8b5cf6;
+            --color-accent: #ec4899;
+            --color-background: #0f172a;
+            --color-surface: #1e293b;
+            --color-text: #f8fafc;
+            --color-text-muted: #cbd5e1;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--color-background);
+            color: var(--color-text);
+            scroll-behavior: smooth;
+            margin: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* أنيميشن الخلفية البرمجية */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+            overflow: hidden;
+        }
+        
+        .code-line {
+            position: absolute;
+            color: rgba(99, 102, 241, 0.7);
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            white-space: nowrap;
+            user-select: none;
+            animation: fall 15s linear infinite;
+        }
+        
+        .html-tag {
+            color: rgba(236, 72, 153, 0.7);
+        }
+        
+        .css-prop {
+            color: rgba(139, 92, 246, 0.7);
+        }
+        
+        .js-keyword {
+            color: rgba(34, 197, 94, 0.7);
+        }
+        
+        @keyframes fall {
+            from {
+                transform: translateY(-100px);
+            }
+            to {
+                transform: translateY(100vh);
+            }
+        }
+        
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+            opacity: 0.1;
+            filter: blur(40px);
+            animation: float 20s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(20px, 40px) rotate(5deg);
+            }
+            50% {
+                transform: translate(-30px, 70px) rotate(-5deg);
+            }
+            75% {
+                transform: translate(10px, 30px) rotate(3deg);
+            }
+        }
+        
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(99, 102, 241, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99, 102, 241, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: gradient-shift 3s ease-in-out infinite;
+        }
+        
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .skill-bar {
+            height: 8px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            transition: width 1s ease-in-out;
+            box-shadow: 0 0 10px rgba(99, 102, 241, 0.4);
+        }
+        
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+        }
+        
+        .timeline-item {
+            border-left: 2px solid var(--color-primary);
+            padding-left: 25px;
+            padding-bottom: 40px;
+            position: relative;
+            transition: border-left-width 0.3s ease;
+        }
+        
+        .timeline-item:hover {
+            border-left-width: 4px;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            left: -9px;
+            top: 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .timeline-item:hover:before {
+            transform: scale(1.3);
+            box-shadow: 0 0 15px var(--color-primary);
+        }
+        
+        input, textarea {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        input:focus, textarea:focus {
+            outline: 1px solid var(--color-secondary);
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+        }
+        
+        .image-placeholder {
+            background: linear-gradient(45deg, #2d2d4a, #3f3f6d);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .image-placeholder:hover {
+            transform: scale(1.02);
+        }
+        
+        .placeholder-label {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            transition: opacity 0.3s ease;
+        }
+        
+        .btn {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        
+        .btn:hover::after {
+            animation: ripple 1s ease-out;
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 1;
+            }
+            20% {
+                transform: scale(60, 60);
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(100, 100);
+            }
+        }
+        
+        /* تحسينات للشريط العلوي */
+        nav {
+            transition: background 0.3s ease, backdrop-filter 0.3s ease;
+        }
+        
+        nav.scrolled {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* تحسينات للروابط */
+        a {
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366f1',
+                        secondary: '#8b5cf6',
+                        accent: '#ec4899',
+                        background: '#0f172a',
+                        surface: '#1e293b',
+                        text: '#f8fafc',
+                        'text-muted': '#cbd5e1'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen">
+    <!-- أنيميشن الخلفية -->
+    <div class="background-animation" id="backgroundAnimation"></div>
+    <div class="grid-overlay"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 py-4 px-6 glass-card" id="navbar">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold gradient-text">Your Initials</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link hover:text-purple-300 transition">Home</a>
+                <a href="#about" class="nav-link hover:text-purple-300 transition">About</a>
+                <a href="#skills" class="nav-link hover:text-purple-300 transition">Skills</a>
+                <a href="#projects" class="nav-link hover:text-purple-300 transition">Projects</a>
+                <a href="#experience" class="nav-link hover:text-purple-300 transition">Experience</a>
+                <a href="#contact" class="nav-link hover:text-purple-300 transition">Contact</a>
+            </div>
+            <div class="md:hidden">
+                <button id="menu-toggle" class="text-white">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden py-4 px-6 glass-card mt-4 rounded-lg">
+            <div class="flex flex-col space-y-4">
+                <a href="#home" class="hover:text-purple-300 transition">Home</a>
+                <a href="#about" class="hover:text-purple-300 transition">About</a>
+                <a href="#skills" class="hover:text-purple-300 transition">Skills</a>
+                <a href="#projects" class="hover:text-purple-300 transition">Projects</a>
+                <a href="#experience" class="hover:text-purple-300 transition">Experience</a>
+                <a href="#contact" class="hover:text-purple-300 transition">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center pt-20 pb-12 px-6">
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
+            <div class="md:w-1/2 mb-10 md:mb-0" data-aos="fade-right">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">Hi, I'm <span class="gradient-text" data-name>Your Name</span></h1>
+                <h2 class="text-xl md:text-2xl text-purple-200 mb-6" data-role>Professional Title | Specialist</h2>
+                <p class="text-lg text-gray-300 mb-8">I create beautiful, functional websites and applications with modern technologies.</p>
+                <div class="flex space-x-4">
+                    <a href="#contact" class="px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg font-medium hover:opacity-90 transition btn">Hire Me</a>
+                    <a href="#" class="px-6 py-3 glass-card rounded-lg font-medium hover:bg-opacity-20 transition btn">Download CV</a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center" data-aos="fade-left">
+                <div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-purple-500/30 relative">
+                    <div class="image-placeholder w-full h-full">
+                        <div>
+                            <i class="fas fa-user fa-3x mb-2"></i>
+                            <p>Replace with your photo</p>
+                            <p class="text-xs mt-1">/assets/hero.jpg</p>
+                        </div>
+                    </div>
+                    <span class="placeholder-label">/assets/hero.jpg</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 px-6">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 gradient-text" data-aos="fade-up">About Me</h2>
+            <div class="flex flex-col md:flex-row items-center gap-8 max-w-5xl mx-auto">
+                <div class="md:w-1/3 flex justify-center" data-aos="fade-right">
+                    <div class="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-purple-500/30 relative">
+                        <div class="image-placeholder w-full h-full">
+                            <div>
+                                <i class="fas fa-user fa-3x mb-2"></i>
+                                <p>Your avatar</p>
+                                <p class="text-xs mt-1">/assets/avatar.png</p>
+                            </div>
+                        </div>
+                        <span class="placeholder-label">/assets/avatar.png</span>
+                    </div>
+                </div>
+                <div class="md:w-2/3 glass-card p-8 rounded-2xl" data-aos="fade-up">
+                    <p class="text-lg mb-6">
+                        I'm a passionate developer with X years of experience in creating digital solutions that make a difference. My journey in tech started when I built my first website, and I've been hooked ever since.
+                    </p>
+                    <p class="text-lg mb-6">
+                        I specialize in JavaScript technologies including React, Node.js, and Express. I love turning complex problems into simple, beautiful, and intuitive solutions.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 mt-6">
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>Web Development</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>UI/UX Design</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>Mobile Applications</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>Cloud Solutions</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-16 px-6">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 gradient-text" data-aos="fade-up">My Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Skills will be populated by JavaScript -->
+                <div id="skills-container"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-16 px-6">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 gradient-text" data-aos="fade-up">My Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Projects will be populated by JavaScript -->
+                <div id="projects-container"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-16 px-6">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 gradient-text" data-aos="fade-up">Experience & Education</h2>
+            <div class="max-w-3xl mx-auto">
+                <!-- Experience will be populated by JavaScript -->
+                <div id="experience-container"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-16 px-6">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 gradient-text" data-aos="fade-up">What People Say</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- Testimonials will be populated by JavaScript -->
+                <div id="testimonials-container"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 px-6">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 gradient-text" data-aos="fade-up">Get In Touch</h2>
+            <div class="flex flex-col md:flex-row gap-12 max-w-5xl mx-auto">
+                <div class="md:w-1/2" data-aos="fade-right">
+                    <form class="space-y-6">
+                        <div>
+                            <label for="name" class="block mb-2">Your Name</label>
+                            <input type="text" id="name" class="w-full px-4 py-3 rounded-lg" placeholder="John Doe" required>
+                        </div>
+                        <div>
+                            <label for="email" class="block mb-2">Email Address</label>
+                            <input type="email" id="email" class="w-full px-4 py-3 rounded-lg" placeholder="john@example.com" required>
+                        </div>
+                        <div>
+                            <label for="message" class="block mb-2">Your Message</label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-3 rounded-lg" placeholder="Hello, I would like to..." required></textarea>
+                        </div>
+                        <button type="submit" class="px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg font-medium w-full hover:opacity-90 transition btn">Send Message</button>
+                    </form>
+                </div>
+                <div class="md:w-1/2" data-aos="fade-left">
+                    <div class="glass-card p-8 rounded-2xl h-full">
+                        <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-envelope text-purple-400"></i>
+                                </div>
+                                <span>your.email@example.com</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-phone text-purple-400"></i>
+                                </div>
+                                <span>+1 (555) 123-4567</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-map-marker-alt text-purple-400"></i>
+                                </div>
+                                <span>Your City, Country</span>
+                            </div>
+                        </div>
+                        <div class="mt-10">
+                            <h4 class="text-xl font-bold mb-4">Follow Me</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center hover:bg-purple-500/30 transition">
+                                    <i class="fab fa-linkedin-in text-purple-400"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center hover:bg-purple-500/30 transition">
+                                    <i class="fab fa-github text-purple-400"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center hover:bg-purple-500/30 transition">
+                                    <i class="fab fa-twitter text-purple-400"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center hover:bg-purple-500/30 transition">
+                                    <i class="fab fa-behance text-purple-400"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center text-gray-400">
+        <p>© <span id="current-year">2023</span> Your Name. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for dynamic content -->
+    <script>
+        // Initialize AOS
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+            
+            // إنشاء أنيميشن الخلفية البرمجية
+            createBackgroundAnimation();
+            
+            // Set current year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            
+            // Mobile menu toggle
+            document.getElementById('menu-toggle').addEventListener('click', function() {
+                document.getElementById('mobile-menu').classList.toggle('hidden');
+            });
+            
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                });
+            });
+            
+            // تأثير التصفح على الشريط العلوي
+            window.addEventListener('scroll', function() {
+                const nav = document.getElementById('navbar');
+                if (window.scrollY > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+            
+            // Populate skills
+            const skills = [
+                { name: 'JavaScript/TypeScript', level: 95 },
+                { name: 'React.js', level: 90 },
+                { name: 'Node.js/Express', level: 88 },
+                { name: 'Python/Django', level: 85 },
+                { name: 'UI/UX Design', level: 82 },
+                { name: 'AWS/Cloud Services', level: 80 }
+            ];
+            
+            const skillsContainer = document.getElementById('skills-container');
+            skills.forEach((skill, index) => {
+                const skillElement = document.createElement('div');
+                skillElement.className = 'glass-card p-6 rounded-2xl';
+                skillElement.setAttribute('data-aos', 'fade-up');
+                skillElement.setAttribute('data-aos-delay', index * 100);
+                
+                skillElement.innerHTML = `
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-lg font-medium">${skill.name}</span>
+                        <span class="text-purple-300">${skill.level}%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: ${skill.level}%"></div>
+                    </div>
+                `;
+                
+                skillsContainer.appendChild(skillElement);
+            });
+            
+            // Populate projects
+            const projects = [
+                { 
+                    id: 1, 
+                    title: 'E-commerce Platform', 
+                    description: 'A full-featured online store with payment processing and inventory management.',
+                    tags: ['React', 'Node.js', 'MongoDB']
+                },
+                { 
+                    id: 2, 
+                    title: 'Task Management App', 
+                    description: 'A productivity application for teams to collaborate on projects and tasks.',
+                    tags: ['Vue', 'Firebase', 'TailwindCSS']
+                },
+                { 
+                    id: 3, 
+                    title: 'Fitness Tracker', 
+                    description: 'A health and wellness app that tracks workouts, nutrition, and progress.',
+                    tags: ['React Native', 'GraphQL', 'AWS']
+                }
+            ];
+            
+            const projectsContainer = document.getElementById('projects-container');
+            projects.forEach((project, index) => {
+                const projectElement = document.createElement('div');
+                projectElement.className = 'glass-card p-6 rounded-2xl project-card';
+                projectElement.setAttribute('data-aos', 'fade-up');
+                projectElement.setAttribute('data-aos-delay', index * 100);
+                
+                projectElement.innerHTML = `
+                    <div class="h-48 overflow-hidden rounded-lg mb-4 relative">
+                        <div class="image-placeholder w-full h-full">
+                            <div>
+                                <i class="fas fa-image fa-3x mb-2"></i>
+                                <p>Project image ${project.id}</p>
+                                <p class="text-xs mt-1">/assets/projects/project-${project.id}.jpg</p>
+                            </div>
+                        </div>
+                        <span class="placeholder-label">/assets/projects/project-${project.id}.jpg</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">${project.title}</h3>
+                    <p class="text-gray-300 mb-4">${project.description}</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        ${project.tags.map(tag => `<span class="px-3 py-1 bg-purple-500/20 rounded-full text-sm">${tag}</span>`).join('')}
+                    </div>
+                    <div class="flex justify-between">
+                        <a href="#" class="text-purple-400 font-medium hover:text-purple-300 transition">Live Demo</a>
+                        <a href="#" class="text-purple-400 font-medium hover:text-purple-300 transition">GitHub</a>
+                    </div>
+                `;
+                
+                projectsContainer.appendChild(projectElement);
+            });
+            
+            // Populate experience
+            const experiences = [
+                {
+                    type: 'experience',
+                    title: 'Senior Web Developer',
+                    organization: 'TechInnovate Solutions',
+                    period: '2020 - Present',
+                    description: 'Lead a team of developers in creating enterprise-level web applications for clients in various industries.'
+                },
+                {
+                    type: 'experience',
+                    title: 'Full Stack Developer',
+                    organization: 'DigitalCraft Studios',
+                    period: '2018 - 2020',
+                    description: 'Developed and maintained multiple web applications using React, Node.js, and MongoDB.'
+                },
+                {
+                    type: 'education',
+                    title: 'MSc in Computer Science',
+                    organization: 'Stanford University',
+                    period: '2016 - 2018',
+                    description: 'Specialized in Software Engineering and Human-Computer Interaction.'
+                },
+                {
+                    type: 'education',
+                    title: 'BSc in Information Technology',
+                    organization: 'MIT',
+                    period: '2012 - 2016',
+                    description: 'Graduated with honors. President of the Web Development Club.'
+                }
+            ];
+            
+            const experienceContainer = document.getElementById('experience-container');
+            experiences.forEach((exp, index) => {
+                const expElement = document.createElement('div');
+                expElement.className = 'timeline-item';
+                expElement.setAttribute('data-aos', 'fade-right');
+                expElement.setAttribute('data-aos-delay', index * 100);
+                
+                expElement.innerHTML = `
+                    <h3 class="text-xl font-bold">${exp.title}</h3>
+                    <p class="text-purple-300 mb-2">${exp.organization} • ${exp.period}</p>
+                    <p class="text-gray-300">${exp.description}</p>
+                `;
+                
+                experienceContainer.appendChild(expElement);
+            });
+            
+            // Populate testimonials
+            const testimonials = [
+                {
+                    name: 'Jane Smith',
+                    role: 'CEO at TechStart',
+                    content: 'An absolute pleasure to work with. Delivered beyond our expectations and ahead of schedule.',
+                    avatar: 'avatar-1'
+                },
+                {
+                    name: 'Michael Johnson',
+                    role: 'Product Manager at InnovateCo',
+                    content: 'Brought our vision to life with technical expertise and creative problem-solving skills.',
+                    avatar: 'avatar-2'
+                }
+            ];
+            
+            const testimonialsContainer = document.getElementById('testimonials-container');
+            testimonials.forEach((testimonial, index) => {
+                const testimonialElement = document.createElement('div');
+                testimonialElement.className = 'glass-card p-6 rounded-2xl';
+                testimonialElement.setAttribute('data-aos', 'fade-up');
+                testimonialElement.setAttribute('data-aos-delay', index * 100);
+                
+                testimonialElement.innerHTML = `
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4 relative">
+                            <div class="image-placeholder w-full h-full">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">${testimonial.name}</h4>
+                            <p class="text-sm text-purple-300">${testimonial.role}</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">"${testimonial.content}"</p>
+                `;
+                
+                testimonialsContainer.appendChild(testimonialElement);
+            });
+            
+            // Form validation
+            const contactForm = document.querySelector('form');
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+                
+                if (name && email && message) {
+                    // Here you would typically send the form data to a server
+                    alert('Thank you for your message! I will get back to you soon.');
+                    contactForm.reset();
+                }
+            });
+            
+            // Animate skill bars on scroll
+            const skillBars = document.querySelectorAll('.skill-progress');
+            
+            const animateSkillBars = () => {
+                skillBars.forEach(bar => {
+                    const width = bar.style.width;
+                    bar.style.width = '0';
+                    setTimeout(() => {
+                        bar.style.width = width;
+                    }, 300);
+                });
+            };
+            
+            // Use Intersection Observer to trigger animation when skills section is in view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateSkillBars();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            observer.observe(document.getElementById('skills'));
+        });
+        
+        // دالة لإنشاء أنيميشن الخلفية البرمجية
+        function createBackgroundAnimation() {
+            const backgroundAnimation = document.getElementById('backgroundAnimation');
+            
+            // إنشاء عناصر عائمة
+            for (let i = 0; i < 5; i++) {
+                const floatingElement = document.createElement('div');
+                floatingElement.classList.add('floating-element');
+                
+                // أحجام وعناصر عشوائية
+                const size = Math.random() * 300 + 100;
+                floatingElement.style.width = `${size}px`;
+                floatingElement.style.height = `${size}px`;
+                
+                // مواقع عشوائية
+                floatingElement.style.left = `${Math.random() * 100}%`;
+                floatingElement.style.top = `${Math.random() * 100}%`;
+                
+                // تأخيرات عشوائية للأنيميشن
+                floatingElement.style.animationDelay = `${Math.random() * 10}s`;
+                
+                backgroundAnimation.appendChild(floatingElement);
+            }
+            
+            // إنشاء أسطر من الأكواد
+            const codeSnippets = [
+                '<div class="html-tag">&lt;div&gt;</div>',
+                '<span class="css-prop">color: #6366f1;</span>',
+                '<span class="js-keyword">function</span> animate() { }',
+                '<span class="html-tag">&lt;section&gt;</span>',
+                '<span class="css-prop">display: flex;</span>',
+                '<span class="js-keyword">const</span> developer = true;',
+                '<span class="html-tag">&lt;div class="container"&gt;</span>',
+                '<span class="css-prop">background: linear-gradient(...);</span>',
+                '<span class="js-keyword">if</span> (awesome) { keepCoding(); }',
+                '<span class="html-tag">&lt;img src="image.jpg" /&gt;</span>',
+                '<span class="css-prop">border-radius: 8px;</span>',
+                '<span class="js-keyword">class</span> Portfolio { }'
+            ];
+            
+            for (let i = 0; i < 20; i++) {
+                const codeLine = document.createElement('div');
+                codeLine.classList.add('code-line');
+                
+                // اختيار مقتطف عشوائي من الأكواد
+                const randomSnippet = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
+                codeLine.innerHTML = randomSnippet;
+                
+                // مواقع وتأخيرات عشوائية
+                codeLine.style.left = `${Math.random() * 100}%`;
+                codeLine.style.animationDelay = `${Math.random() * 15}s`;
+                codeLine.style.animationDuration = `${Math.random() * 10 + 10}s`;
+                
+                backgroundAnimation.appendChild(codeLine);
+            }
+        }
+    </script>
+</body>
+</html>
